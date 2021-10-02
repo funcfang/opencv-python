@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <malloc.h>
 #include "BitmapFormat.h"
@@ -13,19 +14,19 @@ public:
 	void read(char* fileName)
 	{
 		FILE* fp;
-		fp = fopen(fileName, "rb");//¶ÁÈ¡Í¬Ä¿Â¼ÏÂµÄimage.bmpÎÄ¼þ¡£
+		fp = fopen(fileName, "rb");//ï¿½ï¿½È¡Í¬Ä¿Â¼ï¿½Âµï¿½image.bmpï¿½Ä¼ï¿½ï¿½ï¿½
 		if (fp == NULL)
 		{
-			printf("´ò¿ª'image.bmp'Ê§°Ü£¡\n");
+			printf("ï¿½ï¿½'image.bmp'Ê§ï¿½Ü£ï¿½\n");
 			return ;
 		}
-		//Èç¹û²»ÏÈ¶ÁÈ¡bifType£¬¸ù¾ÝCÓïÑÔ½á¹¹ÌåSizeofÔËËã¹æÔò¡ª¡ªÕûÌå´óÓÚ²¿·ÖÖ®ºÍ£¬´Ó¶øµ¼ÖÂ¶ÁÎÄ¼þ´íÎ»
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½È¡bifTypeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ô½á¹¹ï¿½ï¿½Sizeofï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò¡ª¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½Ö®ï¿½Í£ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Î»
 		unsigned short  fileType;
 		fread(&fileType, 1, sizeof(unsigned short), fp);
 		if (fileType = 0x4d42)
 		{
-			printf("ÎÄ¼þÀàÐÍ±êÊ¶ÕýÈ·!");
-			printf("\nÎÄ¼þ±êÊ¶·û£º%d\n", fileType);
+			printf("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Í±ï¿½Ê¶ï¿½ï¿½È·!");
+			printf("\nï¿½Ä¼ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½%d\n", fileType);
 			fread(&fileHeader,sizeof(BITMAPFILEHEADER), 1,  fp);
 			showBmpHead(fileHeader);
 			fread(&infoHeader, sizeof(BITMAPINFOHEADER),1,  fp);
@@ -36,39 +37,39 @@ public:
 	}
 	
 	void showBmpHead(BITMAPFILEHEADER pBmpHead)
-	{  //¶¨ÒåÏÔÊ¾ÐÅÏ¢µÄº¯Êý£¬´«ÈëÎÄ¼þÍ·½á¹¹Ìå
-		printf("BMPÎÄ¼þ´óÐ¡£º%dkb\n", pBmpHead.bfSize / 1024);
-		printf("±£Áô×Ö±ØÐëÎª0£º%d\n", pBmpHead.bfReserved1);
-		printf("±£Áô×Ö±ØÐëÎª0£º%d\n", pBmpHead.bfReserved2);
-		printf("Êµ¼ÊÎ»Í¼Êý¾ÝµÄÆ«ÒÆ×Ö½ÚÊý: %d\n", pBmpHead.bfOffBits);
+	{  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Í·ï¿½á¹¹ï¿½ï¿½
+		printf("BMPï¿½Ä¼ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½%dkb\n", pBmpHead.bfSize / 1024);
+		printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Îª0ï¿½ï¿½%d\n", pBmpHead.bfReserved1);
+		printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Îª0ï¿½ï¿½%d\n", pBmpHead.bfReserved2);
+		printf("Êµï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½Ýµï¿½Æ«ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½: %d\n", pBmpHead.bfOffBits);
 	}
 	
 	void showBmpInfoHead(BITMAPINFOHEADER pBmpinfoHead)
-	{//¶¨ÒåÏÔÊ¾ÐÅÏ¢µÄº¯Êý£¬´«ÈëµÄÊÇÐÅÏ¢Í·½á¹¹Ìå
-		printf("Î»Í¼ÐÅÏ¢Í·:\n");
-		printf("ÐÅÏ¢Í·µÄ´óÐ¡:%d\n", pBmpinfoHead.biSize);
-		printf("Î»Í¼¿í¶È:%d\n", pBmpinfoHead.biWidth);
-		printf("Î»Í¼¸ß¶È:%d\n", pBmpinfoHead.biHeight);
-		printf("Í¼ÏñµÄÎ»ÃæÊý(Î»ÃæÊýÊÇµ÷É«°åµÄÊýÁ¿,Ä¬ÈÏÎª1¸öµ÷É«°å):%d\n", pBmpinfoHead.biPlanes);
-		printf("Ã¿¸öÏñËØµÄÎ»Êý:%d\n", pBmpinfoHead.biBitCount);
-		printf("Ñ¹Ëõ·½Ê½:%d\n", pBmpinfoHead.biCompression);
-		printf("Í¼ÏñµÄ´óÐ¡:%d\n", pBmpinfoHead.biSizeImage);
-		printf("Ë®Æ½·½Ïò·Ö±æÂÊ:%d\n", pBmpinfoHead.biXPelsPerMeter);
-		printf("´¹Ö±·½Ïò·Ö±æÂÊ:%d\n", pBmpinfoHead.biYPelsPerMeter);
-		printf("Ê¹ÓÃµÄÑÕÉ«Êý:%d\n", pBmpinfoHead.biClrUsed);
-		printf("ÖØÒªÑÕÉ«Êý:%d\n", pBmpinfoHead.biClrImportant);
+	{//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Í·ï¿½á¹¹ï¿½ï¿½
+		printf("Î»Í¼ï¿½ï¿½Ï¢Í·:\n");
+		printf("ï¿½ï¿½Ï¢Í·ï¿½Ä´ï¿½Ð¡:%d\n", pBmpinfoHead.biSize);
+		printf("Î»Í¼ï¿½ï¿½ï¿½:%d\n", pBmpinfoHead.biWidth);
+		printf("Î»Í¼ï¿½ß¶ï¿½:%d\n", pBmpinfoHead.biHeight);
+		printf("Í¼ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½(Î»ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½Îª1ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½):%d\n", pBmpinfoHead.biPlanes);
+		printf("Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½Î»ï¿½ï¿½:%d\n", pBmpinfoHead.biBitCount);
+		printf("Ñ¹ï¿½ï¿½ï¿½ï¿½Ê½:%d\n", pBmpinfoHead.biCompression);
+		printf("Í¼ï¿½ï¿½Ä´ï¿½Ð¡:%d\n", pBmpinfoHead.biSizeImage);
+		printf("Ë®Æ½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½:%d\n", pBmpinfoHead.biXPelsPerMeter);
+		printf("ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½:%d\n", pBmpinfoHead.biYPelsPerMeter);
+		printf("Ê¹ï¿½Ãµï¿½ï¿½ï¿½É«ï¿½ï¿½:%d\n", pBmpinfoHead.biClrUsed);
+		printf("ï¿½ï¿½Òªï¿½ï¿½É«ï¿½ï¿½:%d\n", pBmpinfoHead.biClrImportant);
 	}
 	
-	//ÐÞ¸ÄÍ¼Æ¬²¢±£´æ 
+	//ï¿½Þ¸ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	void update_bmp(char* fileName,char* savedFileName)
 	{
-		printf("\n½«¶ÁÈ¡µÄÍ¼Æ¬ÖÐ¼ä1/4Ãæ»ýÏñËØ¸ÄÎª0£¬²¢ÇÒ±£´æÍ¼Æ¬¡£\n");
+		printf("\nï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Í¼Æ¬ï¿½Ð¼ï¿½1/4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½\n");
 		
 		FILE* fp;
 		fp = fopen(fileName, "rb");
 		if (fp == NULL)
 		{
-			printf("´ò¿ª'image.bmp'Ê§°Ü£¡\n");
+			printf("ï¿½ï¿½'image.bmp'Ê§ï¿½Ü£ï¿½\n");
 			return ;
 		}
 
@@ -76,10 +77,10 @@ public:
 		fread(&fileType, 1, sizeof(unsigned short), fp);
 		if (fileType = 0x4d42)
 		{
-			printf("ÎÄ¼þÀàÐÍ±êÊ¶ÕýÈ·!");
-			printf("\nÎÄ¼þ±êÊ¶·û£º%d\n", fileType);
+			printf("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Í±ï¿½Ê¶ï¿½ï¿½È·!");
+			printf("\nï¿½Ä¼ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½%d\n", fileType);
 		
-			//Í¼ÏñÊý¾ÝµÄ²Ù×÷
+			//Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ²ï¿½ï¿½ï¿½
 			fseek(fp, fileHeader.bfOffBits, SEEK_SET);
 			unsigned char *r, *g, *b;
 			r = (unsigned char *)malloc(sizeof(unsigned char)*infoHeader.biWidth*infoHeader.biHeight);
@@ -101,7 +102,7 @@ public:
 			}
 			fclose(fp);
 			
-			//´æ´¢Í¼Ïñ
+			//ï¿½æ´¢Í¼ï¿½ï¿½
 			FILE* fpout;
 			fpout = fopen(savedFileName, "wb");
 			fwrite(&fileType, sizeof(unsigned short), 1, fpout);
@@ -109,7 +110,7 @@ public:
 			fwrite(&infoHeader, sizeof(BITMAPINFOHEADER), 1, fpout);	
 			for (j = 0; j < infoHeader.biHeight; j++)
 			{
-				bool flag = false;  //Ä¬ÈÏ²»´¦ÓÚÍ¼Æ¬ÖÐ¼ä
+				bool flag = false;  //Ä¬ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ð¼ï¿½
 				if( j>= (0.25)*infoHeader.biHeight && j<= (0.75)*infoHeader.biHeight) flag = true;
 				for (i = 0; i < infoHeader.biWidth; i++)
 				{
@@ -130,7 +131,7 @@ public:
 					
 				}
 			}
-			printf("ÐÞ¸Ä³É¹¦£¬Áí´æÎª %s\n",savedFileName);
+			printf("ï¿½Þ¸Ä³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª %s\n",savedFileName);
 			fclose(fpout);
 		}
 	}
