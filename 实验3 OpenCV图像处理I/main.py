@@ -50,7 +50,7 @@ def show_hist(hist_):
 def demo3():
     # 加载原始图像
     img = cv2.imread('duibi_demo.jpg')
-    # img = cv2.imread('demo.bmp')
+    # img = cv2.imread('lena.bmp')
     height, width = img.shape[:2]
     img = cv2.resize(img, (int(width / 1.7), int(height / 1.7)))  # 图片缩放
     cv2.imshow("origin", img)

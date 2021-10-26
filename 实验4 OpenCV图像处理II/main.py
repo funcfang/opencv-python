@@ -4,7 +4,7 @@ import numpy as np
 
 # （一）使用OpenCV对图像进行缩放、旋转、相似变换、仿射变换
 def demo1():
-    img = cv.imread('../demo.bmp')
+    img = cv.imread('../lena.bmp')
     cv.imshow('origin', img)
     # 按照指定的宽度、高度缩放图片
     res = cv.resize(img, (200, 200))
