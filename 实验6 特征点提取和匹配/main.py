@@ -1,3 +1,4 @@
+import sys
 import time
 
 import cv2
@@ -25,7 +26,7 @@ def demo1():
     # gray = np.float32(gray)
     # 输入图像必须是 float32 ,最后一个参数在 0.04 到 0.05 之间
     dst = cv2.cornerHarris(gray, blockSize=2, ksize=3, k=0.04)
-    dst = cv2.dilate(dst, None)
+    dst = cv2.dilate(dst, None)  # 放大特征点
     img[dst > 0.01 * dst.max()] = [0, 0, 255]
     cv2.imshow('origin', origin)
     cv2.imshow('Harris', img)
@@ -67,9 +68,6 @@ def demo2():
 
 
 # （三）使用OpenCV对两幅有重叠的图片匹配后进行拼接，生成全景图（选做）
-"""
-https://blog.csdn.net/qq_43697752/article/details/107807251
-"""
 
 """
 https://www.cnblogs.com/my-love-is-python/p/9755456.html
@@ -195,9 +193,13 @@ def demo3():
 #     imageA = cv2.resize(imageA, None, fx=0.7, fy=0.7, interpolation=cv2.INTER_CUBIC)  # 缩放
 #     imageB = cv2.resize(imageB, None, fx=0.7, fy=0.7, interpolation=cv2.INTER_CUBIC)
 #
-#     stitcher = cv2.Stitcher.create(cv2.Stitcher_PANORAMA)
+#     # stitcher = cv2.Stitcher.create(cv2.Stitcher_PANORAMA) #根据不同cv版本选择
+#     stitcher = cv2.createStitcher(False)
 #
-#     _result, pano = stitcher.stitch((imageA, imageB))
+#     (_result, pano) = stitcher.stitch((imageA, imageB))
+#     if _result != cv2.Stitcher_OK:
+#         print("不能拼接图片, error code = %d" % _result)
+#         sys.exit(-1)
 #     cv2.imshow("match", pano)
 #     cv2.waitKey(0)
 #     cv2.destroyAllWindows()
