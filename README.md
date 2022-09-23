@@ -1,4 +1,4 @@
 # opencv-python
-课上opencv练习集合
+为计算机视觉课程实验代码（SZTU）
 
 
